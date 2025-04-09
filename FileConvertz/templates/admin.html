@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - FileTrans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('upload_file') }}">Converter</a>
+        <a href="{{ url_for('account') }}">Account</a>
+        <a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+    <div class="full-screen-form">
+        <h1>Admin Dashboard</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="post">
+            <h2>Update Admin Credentials</h2>
+            <input type="text" name="new_username" placeholder="New Username" required>
+            <input type="password" name="new_password" placeholder="New Password" required>
+            <input type="hidden" name="action" value="update_admin">
+            <button type="submit">Update</button>
+        </form>
+        <form method="post">
+            <h2>Credit Conversion Rates</h2>
+            <p>Current: 1 credit = {{ mb_per_credit }} MB, 1 credit = ${{ usd_per_credit }}</p>
+            <input type="number" step="0.01" name="mb_per_credit" placeholder="MB per Credit" value="{{ mb_per_credit }}" required>
+            <input type="number" step="0.01" name="usd_per_credit" placeholder="USD per Credit" value="{{ usd_per_credit }}" required>
+            <input type="hidden" name="action" value="update_rates">
+            <button type="submit">Update Rates</button>
+        </form>
+    </div>
+    <div class="admin-section">
+        <h2>Manage Users</h2>
+        <form method="post" class="search-form">
+            <input type="text" name="search_query" placeholder="Search users by username" value="{{ search_query }}">
+            <input type="hidden" name="action" value="search_users">
+            <button type="submit">Search</button>
+        </form>
+        {% if users %}
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Credits</th>
+                    <th>Actions</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user[0] }}</td>
+                        <td>{{ user[1] }}</td>
+                        <td>{{ user[2] }}</td>
+                        <td>
+                            <form method="post" style="display:inline;">
+                                <input type="hidden" name="user_id" value="{{ user[0] }}">
+                                <input type="hidden" name="action" value="remove_user">
+                                <button type="submit" class="remove-btn">Remove</button>
+                            </form>
+                            <form method="post" style="display:inline;">
+                                <input type="hidden" name="user_id" value="{{ user[0] }}">
+                                <input type="hidden" name="action" value="update_credits">
+                                <input type="number" name="credits" value="{{ user[2] }}" min="0" required>
+                                <button type="submit">Update Credits</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No users found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

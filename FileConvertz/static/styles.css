@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text */
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    background-color: #9a2a2a; /* Garnet */
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+}
+
+nav a:hover {
+    background-color: #7a1f1f; /* Darker garnet on hover */
+}
+
+/* Container for login/register pages */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px; /* Limit width on large screens */
+    margin: 0 auto;
+}
+
+/* Full-screen layout for index and admin pages */
+.full-screen-form {
+    flex: 1;
+    padding: 2rem;
+    width: 100%;
+    background-color: white; /* White background for form area */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #9a2a2a; /* Garnet */
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+form {
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Keep form elements constrained */
+}
+
+input, select, button {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #9a2a2a; /* Garnet */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #7a1f1f; /* Darker garnet */
+}
+
+.flash {
+    color: #9a2a2a; /* Garnet for errors/messages */
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+p {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+p a {
+    color: #9a2a2a; /* Garnet */
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Info section for index page */
+.info-section {
+    width: 100%;
+    padding: 2rem;
+    background-color: #f0f0f0; /* Gray background */
+    text-align: center;
+}
+
+.info-section h2 {
+    color: #9a2a2a; /* Garnet */
+    margin-bottom: 1rem;
+}
+
+.info-section h3 {
+    color: #9a2a2a; /* Garnet */
+    margin: 1rem 0 0.5rem;
+}
+
+.info-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.info-section li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+/* Ad container styles */
+.ad-container {
+    text-align: center;
+    background-color: white; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.ad-container.bottom-ad {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 500px; /* Matches form width */
+    padding: 1rem;
+}
+
+.ad-container.left-ad {
+    position: fixed;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 160px;
+    height: 600px;
+    z-index: 1000;
+}
+
+.ad-container.right-ad {
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 160px;
+    height: 600px;
+    z-index: 1000;
+}
+
+/* Admin dashboard styles */
+.admin-section {
+    width: 100%;
+    padding: 2rem;
+    background-color: #f0f0f0; /* Gray background */
+    text-align: center;
+}
+
+.admin-section h2 {
+    color: #9a2a2a; /* Garnet */
+    margin-bottom: 1rem;
+}
+
+.admin-section .search-form {
+    padding: 1rem;
+    display: flex;
+    gap: 0.5rem; /* Reduced gap for tighter layout */
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto 1rem;
+}
+
+.admin-section .search-form input[type="text"] {
+    flex: 3; /* Input takes more space */
+    min-width: 0; /* Prevents overflow */
+    padding: 0.75rem;
+}
+
+.admin-section .search-form button {
+    flex: 1; /* Button takes less space */
+    max-width: 100px; /* Limits button width */
+    padding: 0.75rem 1rem; /* Consistent padding */
+}
+
+.admin-section .user-table-form {
+    padding: 0; /* No padding around table form */
+    box-shadow: none; /* No shadow on table form */
+    max-width: 600px; /* Matches table width */
+    margin: 0 auto; /* Centers table */
+}
+
+.admin-section table {
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem auto;
+    border-collapse: collapse;
+}
+
+.admin-section th, .admin-section td {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+}
+
+.admin-section th {
+    background-color: #9a2a2a; /* Garnet */
+    color: white;
+}
+
+.admin-section td {
+    background-color: white;
+}
+
+.admin-section .remove-btn {
+    padding: 0.5rem 1rem;
+    margin: 0;
+    width: auto; /* Ensures button fits content */
+    display: inline-block; /* Prevents full-width stretching */
+}
+
+/* Account page styles */
+.account-container {
+    background-color: white; /* White background for account info */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    max-width: 500px; /* Matches form width */
+}
+
+.account-info {
+    width: 100%;
+    padding: 1rem;
+    background-color: #f9f9f9; /* Slightly off-white for contrast */
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.account-info p {
+    margin: 0.75rem 0;
+    font-size: 1.1rem;
+}
+
+.account-info strong {
+    color: #9a2a2a; /* Garnet for labels */
+    margin-right: 0.5rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    .container, .full-screen-form {
+        padding: 1rem;
+    }
+
+    form {
+        padding: 1rem;
+    }
+
+    .info-section, .admin-section {
+        padding: 1rem;
+    }
+
+    .admin-section .search-form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .admin-section .search-form input[type="text"] {
+        flex: none; /* Reset flex on mobile */
+        width: 100%; /* Full width on mobile */
+    }
+
+    .admin-section .search-form button {
+        flex: none; /* Reset flex on mobile */
+        max-width: none; /* Remove max-width on mobile */
+        width: 100%; /* Full width on mobile */
+    }
+
+    h1, .info-section h2, .info-section h3, .admin-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .admin-section table {
+        font-size: 0.9rem;
+    }
+
+    .ad-container.bottom-ad {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        max-width: 100%; /* Full width on mobile */
+    }
+
+    .ad-container.left-ad,
+    .ad-container.right-ad {
+        display: none; /* Hide side ads on mobile */
+    }
+
+    .account-container {
+        padding: 1rem;
+        max-width: 100%; /* Full width on mobile */
+    }
+
+    .account-info {
+        padding: 0.75rem;
+    }
+
+    .account-info p {
+        font-size: 1rem;
+    }
+}

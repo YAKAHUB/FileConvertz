@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter - FileTrans</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- AdSense Head Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_CLIENT_ID"
+            crossorigin="anonymous"></script>
+    <script>
+        function updateOutputOptions() {
+            const fileInput = document.getElementById('fileInput');
+            const outputSelect = document.getElementById('outputFormat');
+            outputSelect.innerHTML = ''; // Clear current options
+
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                const ext = fileName.split('.').pop().toLowerCase();
+                const options = {{ output_options|tojson|safe }};
+                const supported = options[ext] || [];
+
+                supported.forEach(fmt => {
+                    const option = document.createElement('option');
+                    option.value = fmt;
+                    option.text = fmt.toUpperCase();
+                    outputSelect.appendChild(option);
+                });
+
+                if (supported.length === 0) {
+                    const option = document.createElement('option');
+                    option.value = '';
+                    option.text = 'No supported formats';
+                    outputSelect.appendChild(option);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('upload_file') }}">Converter</a>
+        <a href="{{ url_for('account') }}">Account</a>
+        {% with user = session.user_id %}
+            {% if user %}
+                <a href="{{ url_for('admin_dashboard') }}"
+                   {% with admin_check = get_user_is_admin(session.user_id) %}
+                       {% if not admin_check %}style="display:none;"{% endif %}
+                   {% endwith %}>Admin</a>
+            {% endif %}
+        {% endwith %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+    <div class="full-screen-form">
+        <h1>Upload a File to Convert</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileInput" onchange="updateOutputOptions()" required>
+            <select name="output_format" id="outputFormat">
+                <option value="">Select a file first</option>
+            </select>
+            <button type="submit">Convert</button>
+        </form>
+        <!-- Bottom Ad Unit -->
+        <div class="ad-container bottom-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_CLIENT_ID"
+                 data-ad-slot="YOUR_BOTTOM_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    <div class="info-section">
+        <h2>About FileTrans</h2>
+        <p>FileTrans supports a wide range of file conversions to meet your needs.</p>
+        <h3>Supported Conversion Types</h3>
+        <ul>
+            <li><strong>Fonts:</strong> TTF, OTF, WOFF, WOFF2</li>
+            <li><strong>Images:</strong> PNG, JPG, JPEG, GIF, BMP, TIFF, WEBP</li>
+            <li><strong>Documents:</strong> PDF to PNG/JPG/JPEG/DOCX/TXT, DOCX to PDF/TXT, TXT to PDF/DOCX/MD, ODT to DOCX/TXT, MD to PDF/TXT</li>
+            <li><strong>Audio:</strong> MP3, WAV, OGG, FLAC, AAC, M4A</li>
+            <li><strong>Video:</strong> MP4, AVI, MKV, MOV, WMV, FLV, WEBM</li>
+            <li><strong>Archives:</strong> ZIP, TAR, GZ, 7Z</li>
+            <li><strong>Data Files:</strong> CSV, XLS, XLSX to CSV/XLS/XLSX/JSON/TXT, JSON to CSV/TXT, XML to JSON/TXT</li>
+        </ul>
+    </div>
+    <!-- Left Corner Ad Unit -->
+    <div class="ad-container left-ad">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-YOUR_CLIENT_ID"
+             data-ad-slot="YOUR_LEFT_AD_SLOT_ID"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    <!-- Right Corner Ad Unit -->
+    <div class="ad-container right-ad">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-YOUR_CLIENT_ID"
+             data-ad-slot="YOUR_RIGHT_AD_SLOT_ID"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+</body>
+</html>
