@@ -1,0 +1,13 @@
+flask
+werkzeug
+fonttools         # Fonts
+pillow          # Images
+pdf2image      # PDF to image
+pypdf2          # PDF to text
+python-docx     # DOCX
+markdown          # Markdown
+rtf2xml           # RTF (optional, limited support)
+odfpy           # ODT
+ffmpeg-python   # Audio/Video (requires ffmpeg installed)
+py7zr          # 7Z archives
+openpyxl        # XLS/XLSX
